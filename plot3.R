@@ -13,12 +13,16 @@ data$Date <- as.Date(data$Date , "%d/%m/%Y")
 data_f <- subset(data, Date >= "2007-02-01" & Date <= "2007-02-02")
 
 #Create png file
-png("plot2.png", width = 480 , height = 480)
+png("plot3.png", width = 480 , height = 480)
 
 with(data_f,
-     plot(x = DateTime, y = Global_active_power,
-          type="l", ylab="Global Active Power (kilowatts)"))
+     plot(x = DateTime, y = Sub_metering_1, type="l", ylab="Energy sub metering"))
+with(data_f, lines(x = DateTime, y = Sub_metering_2, col = "red"))
+with(data_f, lines(x = DateTime, y = Sub_metering_3, col = "blue"))
+legend("topright", 
+       col = c("black", "red" , "blue"),
+       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
+       lty = c(1,1),
+       lwd = c(1,1))
 
 dev.off()
-
-
